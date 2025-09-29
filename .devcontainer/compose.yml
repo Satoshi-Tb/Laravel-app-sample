@@ -1,0 +1,37 @@
+name: laravel-app
+
+services:
+  app:
+    container_name: laravel-app-app
+    build:
+      context: ./app
+    volumes:
+      - ../:/laravel-app:cached
+      - laravel-app-vendor:/laravel-app/vendor
+      - laravel-app-node_modules:/laravel-app/node_modules
+    tty: true
+    networks:
+      - laravel-app-net
+    depends_on:
+      - db
+
+  db:
+    container_name: laravel-app-db
+    image: mariadb:11.4.4
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: db-name
+      MARIADB_USER: db-user
+      MARIADB_PASSWORD: db-pass
+      TZ: Asia/Tokyo
+    ports:
+      - 3306:3306
+    networks:
+      - laravel-app-net
+
+volumes:
+  laravel-app-vendor:
+  laravel-app-node_modules:
+
+networks:
+  laravel-app-net:

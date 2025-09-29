@@ -1,0 +1,23 @@
+{
+    "name": "Laravel App",
+    "dockerComposeFile": "../compose.yml",
+    "service": "app",
+    "workspaceFolder": "/laravel-app",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "php.validate.executablePath": "/usr/bin/php",
+                "intelephense.environment.phpVersion": "8.4",
+                "intelephense.environment.includePaths": ["/laravel-app"]
+            },
+            "extensions": [
+                "onecentlin.laravel-extension-pack",
+                "formulahendry.auto-rename-tag",
+                "bmewburn.vscode-intelephense-client",
+                "ecmel.vscode-html-css",
+                "neilbrayfield.php-docblocker",
+                "jacobcassidy.css-nesting-syntax-highlighting"
+            ]
+        }
+    }
+}
