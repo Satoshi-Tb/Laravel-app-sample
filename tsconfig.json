@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["resources/ts/*"],
+            "@css/*": ["resources/css/*"]
+        },
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "types": [
+            "vite/client"
+        ],
+        "strict": true,
+        "noImplicitThis": true,
+        "skipLibCheck": true,
+
+    },
+    "include": [
+        "resources/ts/**/*.ts",
+        "resources/ts/**/*.d.ts"
+    ],
+    "exclude": [
+        "app",
+        "bootstrap",
+        "config",
+        "database",
+        "node_modules",
+        "public",
+        "routes",
+        "storage",
+        "tests",
+        "vendor"
+    ]
+}
