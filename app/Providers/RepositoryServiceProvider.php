@@ -18,6 +18,9 @@ class RepositoryServiceProvider extends ServiceProvider
                 Todo\IndexController::class,
                 Todo\NewController::class,
                 Todo\EditController::class,
+                Todo\CreateController::class,
+                Todo\UpdateController::class,
+                Todo\DeleteController::class,
             ])
             ->needs(Repository::class)
             ->give(fn() => new TodoRepository());
