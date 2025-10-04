@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Todo;
 
+use App\Enums\Color;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class CreateRequest extends FormRequest
 {
@@ -26,7 +28,8 @@ class CreateRequest extends FormRequest
             'memo' => ['nullable', 'string'],
             'date' => ['nullable', 'date_format:Y-m-d'],
             'time' => ['nullable', 'date_format:H:i'],
-            'color' => ['nullable', 'string'],
+            'color' => ['nullable', new Enum(Color::class)],
+            'done' => ['required', 'boolean'],
         ];
     }
 }
