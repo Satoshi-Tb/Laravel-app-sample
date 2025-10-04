@@ -12,10 +12,9 @@
     <title>{{ env('APP_NAME') }}</title>
 </head>
 <body class="h-dvh w-screen bg-white [&>:box-border]">
-
+    @include('common.header')
     <main class="w-full h-full pt-header">
         @yield('main')
     </main>
-
 </body>
 </html>
