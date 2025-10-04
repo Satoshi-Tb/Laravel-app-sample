@@ -22,7 +22,7 @@ use App\Http\Controllers\Todo\UpdateController;
      ->group(function () {
         Route::get('/', IndexController::class)->name('index');
         Route::get('/new', NewController::class)->name('new');
-        Route::get('/edit', EditController::class)->name('edit');
+        Route::get('/edit/{id}', EditController::class)->name('edit');
         Route::post('/create', CreateController::class)->name('create');
         Route::put('/update', UpdateController::class)->name('update');
         Route::delete('/delete', DeleteController::class)->name('delete');

@@ -14,6 +14,25 @@ class CreateController extends Controller
 
     public function __invoke(CreateRequest $request)
     {
+        $data = $request->validated();
 
+        $date = $data['date'];
+        $time = $data['time'];
+
+        $datetime = null;
+
+        if ($date !== null && $time !== null) {
+            $datetime = "{$date} {$time}";
+        }
+
+        $this->repository->add([
+            'title' => $data['title'],
+            'memo' => $data['memo'],
+            'deadline' => $datetime,
+            'color' => $data['color'],
+            'user_id' => 1,
+        ]);
+
+        return redirect()->route('todo.index');
     }
 }

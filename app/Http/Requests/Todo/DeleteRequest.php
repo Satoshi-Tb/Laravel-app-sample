@@ -23,11 +23,6 @@ class DeleteRequest extends FormRequest
     {
         return [
             'id' => ['required', 'integer'],
-            'title' => ['required', 'string'],
-            'memo' => ['nullable', 'string'],
-            'date' => ['nullable', 'date_format:Y-m-d'],
-            'time' => ['nullable', 'date_format:H:i'],
-            'color' => ['nullable', 'string'],
         ];
     }
 }
