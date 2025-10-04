@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('main')
 <div>
     <h1>TODO一覧</h1>
     <ui>
@@ -6,3 +9,6 @@
         @endforeach
     </ui>
 </div>
+@endsection
+
+
