@@ -7,18 +7,12 @@
         </div>
 
         <div class="flex gap-2">
-            <a
-                class="transition duration-300 ease-in-out hover:scale-[1.2] hover:text-blue-500"
-                href="{{ route('todo.new') }}"
-            >
-                <span class="material-icons-round text-2xl">add</span>
-            </a>
-            <a
-                class="transition duration-300 ease-in-out hover:scale-[1.2] hover:text-blue-500"
-                href="{{ route('todo.index') }}"
-            >
-                <span class="material-icons-round text-2xl">list</span>
-            </a>
+            <x-link href="{{ route('todo.new') }}">
+                <x-google-icon name="add" class="text-2xl"/>
+            </x-link>
+            <x-link href="{{ route('todo.index') }}">
+                <x-google-icon name="add" class="text-2xl"/>
+            </x-link>
         </div>
     </div>
 </header>
