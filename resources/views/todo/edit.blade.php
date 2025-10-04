@@ -13,12 +13,15 @@
             </h2>
             <div class="mt-5 flex gap-6 flex-col">
                 <input value="{{ $todo->title }}" type="text" name="title" placeholder="ToDo" autocomplete="off" class="p-3 text-lg border-b border-gray-400 focus:outline-none focus:border-blue-500">
+                @error('title')
+                    <p class="text-red-400">{{ $message }}</p>
+                @enderror
                 <input value="{{ $todo->date }}" type="date" name="date" placeholder="期限" autocomplete="off" class="p-3 text-xs rounded-md border border-gray-400 focus:outline-blue-500">
                 <input value="{{ $todo->time }}" type="time" name="time" step="60" placeholder="期限" autocomplete="off" class="p-3 text-xs rounded-md border border-gray-400 focus:outline-blue-500">
                 <select name="color" autocomplete="off" class="p-3 text-xs rounded-md border border-gray-400 focus:outline-blue-500">
-                        <option value="">色を選択してください</option>
+                    <option value="">色を選択してください</option>
                     @foreach (Color::cases() as $color)
-                        <option value="{{ $color }}" style="background-color: {{ $color }};">{{ $color->display() }}</option>
+                        <option value="{{ $color }}" style="background-color: {{ $color }};" @selected($color->value === $todo->color)>{{ $color->display() }}</option>
                     @endforeach
                 </select>
                 <textarea name="memo" placeholder="メモ" class="w-full min-h-20 resize-none field-sizing-content p-3 text-xs rounded-md border border-gray-400 focus:outline-blue-500">{{ $todo->memo }}</textarea>

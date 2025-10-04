@@ -33,4 +33,12 @@ class UpdateRequest extends FormRequest
             'done' => ['required', 'boolean'],
         ];
     }
+
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'ToDoのタイトルが入力されていません',
+        ];
+    }
 }
