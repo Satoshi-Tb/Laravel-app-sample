@@ -2,7 +2,7 @@
 
 @section('main')
 <div class="w-full h-auto pt-14 pb-10 flex justify-center items-start">
-    <div class="h-auto w-[70vh] py-10 px-14 border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200">
+    <div class="h-auto w-[70vh] py-10 px-14 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200">
         <form action="{{ route('user.create') }}" method="POST">
             @csrf
             <h2 class="text-xl font-semibold tracking-wider">
@@ -28,9 +28,9 @@
             @enderror
             </div>
             <div class="mt-10 flex justify-end">
-                <button type="submit" class="p-3 text-sm text-white bg-blue-500 rounded-sm shadow-md shadow-gray-300">
+                <x-submit-button>
                     登録
-                </button>
+                </x-submit-button>
             </div>
         </form>
     </div>

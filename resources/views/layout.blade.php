@@ -12,7 +12,7 @@
     @stack('scripts')
     <title>{{ env('APP_NAME') }}</title>
 </head>
-<body class="min-h-dvh w-screen bg-gradient-to-br from-[#f3f6fb] via-[#fbfbfe] to-[#f6f1ff] text-slate-800 [&>:box-border]">
+<body class="min-h-dvh w-screen bg-[#F2F5F9] text-slate-800 [&>:box-border]">
     @unless (View::hasSection('hide-header'))
         @include('common.header')
     @endunless
