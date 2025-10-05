@@ -15,6 +15,8 @@
             <div class="w-[7%] h-full absolute top-0 left-0" style="background-color: {{ $todo->color }}"></div>
             <form action="{{ route('todo.delete') }}" method="POST">
                 @method('DELETE')
+                @csrf
+                <input type="number" name="id" value="{{ $todo->id }}" class="h-0 invisible">
                 <div class="flex items-start gap-6 ml-7">
                     <div class="mt-2">
                         <input
@@ -48,13 +50,13 @@
                         >
                             編集
                         </x-link>
-                        <x-link
-                            href="{{ route('todo.delete', ['id' => $todo->id]) }}"
+                        <button
+                            type="submit"
                             class="px-4 py-2 text-xs font-semibold text-white bg-red-500 rounded-md shadow-sm shadow-gray-200 hover:bg-red-600"
+                            onclick="return confirm('削除しますか？');"
                         >
                             削除
-                        </x-link>
-
+                        </button>
                     </div>
                 </div>
             </form>
