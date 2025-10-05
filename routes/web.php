@@ -19,6 +19,7 @@ Route::prefix('/auth')
     ->as('auth.')
     ->group(function () {
         Route::post('/login', Auth\LoginController::class)->name('login');
+        Route::get('/logout', Auth\LogoutController::class)->name('logout');
     });
 
 Route::prefix('/user')
