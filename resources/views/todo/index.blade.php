@@ -15,14 +15,20 @@
             <div class="w-[7%] h-full absolute top-0 left-0" style="background-color: {{ $todo->color }}"></div>
             <form action="{{ route('todo.delete') }}" method="POST">
                 @method('DELETE')
-                <div class="flex items-center gap-7">
+                <div class="flex items-start gap-6 ml-7">
                     <div class="mt-2">
-                        <input type="checkbox" @checked($todo->done) class="w-[25px] h-[25px] cursor-pointer todo-done" todo-id="{{ $todo->id }}">
+                        <input
+                            id="todo-{{ $todo->id }}"
+                            type="checkbox"
+                            @checked($todo->done)
+                            class="w-[25px] h-[25px] cursor-pointer todo-done"
+                            todo-id="{{ $todo->id }}"
+                        >
                     </div>
-                    <div class="w-full flex flex-col items-start gap-3">
-                        <x-link href="{{ route('todo.edit', ['id' => $todo->id]) }}" class="text-md font-semibold tracking-wider">
+                    <div class="flex-1 flex flex-col items-start gap-3">
+                        <label for="todo-{{ $todo->id }}" class="text-md font-semibold tracking-wider cursor-pointer">
                             {{ $todo->title }}
-                        </x-link>
+                        </label>
                         @if ($todo->memo !== null)
                             <span class="text-xs">
                                 {{ $todo->memo }}
@@ -34,6 +40,14 @@
                                 {{ Carbon::create($todo->deadline)->isoFormat('YYYY/MM/DD（ddd）HH:mm') }}
                             </span>
                         </div>
+                    </div>
+                    <div class="ml-auto flex items-start">
+                        <x-link
+                            href="{{ route('todo.edit', ['id' => $todo->id]) }}"
+                            class="px-4 py-2 text-xs font-semibold text-white bg-blue-500 rounded-md shadow-sm shadow-gray-200 hover:bg-blue-600"
+                        >
+                            編集
+                        </x-link>
                     </div>
                 </div>
             </form>
