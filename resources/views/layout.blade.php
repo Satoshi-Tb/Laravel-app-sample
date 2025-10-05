@@ -12,7 +12,7 @@
     @stack('scripts')
     <title>{{ env('APP_NAME') }}</title>
 </head>
-<body class="h-dvh w-screen bg-white [&>:box-border]">
+<body class="min-h-dvh w-screen bg-gradient-to-br from-[#f3f6fb] via-[#fbfbfe] to-[#f6f1ff] text-slate-800 [&>:box-border]">
     @include('common.header')
     <main class="w-full h-full pt-header">
         @yield('main')
