@@ -7,6 +7,7 @@
     <div class="h-auto w-[70vh] py-10 px-14 border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200">
         <form action="{{ route('todo.update') }}" method="POST">
             @method('PUT')
+            @csrf
             <input type="number" name="id" value="{{ $todo->id }}" class="h-0 invisible">
             <h2 class="text-xl font-semibold tracking-wider">
                 Edit ToDo
