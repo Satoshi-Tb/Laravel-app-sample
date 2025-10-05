@@ -3,7 +3,7 @@
 @section('hide-header', true)
 
 @section('main')
-<div class="w-full min-h-dvh flex flex-col items-center justify-center gap-10 px-6 py-20 text-center">
+<div class="w-full h-[50dvh] flex flex-col items-center justify-center gap-10 px-6 py-20 text-center">
     <div class="max-w-3xl space-y-6">
         <h1 class="text-4xl md:text-5xl font-semibold leading-tight">
             {{ env('APP_NAME') }}で
@@ -18,7 +18,7 @@
         <a href="{{ route('login') }}" class="px-6 py-3 text-sm font-semibold text-white bg-blue-500 rounded-full shadow-sm shadow-blue-100 hover:bg-blue-600 transition">
             ログイン
         </a>
-        <a href="{{ route('signup') }}" class="px-6 py-3 text-sm font-semibold text-white bg-emerald-500 rounded-full shadow-sm shadow-emerald-100 hover:bg-emerald-600 transition">
+        <a href="{{ route('signup') }}" class="text-sm text-blue-500 hover:underline">
             新規登録
         </a>
     </div>
