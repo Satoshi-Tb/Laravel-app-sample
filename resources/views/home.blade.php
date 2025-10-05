@@ -7,3 +7,6 @@
     </h1>
 </div>
 @endsection
+@php
+    // phpinfo()
+@endphp
