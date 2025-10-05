@@ -20,7 +20,7 @@ class IndexController extends Controller
             return redirect()->route('login');
         }
 
-        $todos = $this->repository->list($user->id)->sortBy("deadline", SORT_DESC, true);
+        $todos = $this->repository->list($user->id);
 
         return view('todo.index', [
             'todos' => $todos,

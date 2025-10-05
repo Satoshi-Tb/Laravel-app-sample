@@ -31,7 +31,11 @@ class TodoRepository implements Repository
      */
     public function list(int $userId): Collection
     {
-        return DB::table($this->tableName)->where('user_id', $userId)->get();
+        return DB::table($this->tableName)
+            ->where('user_id', $userId)
+            ->orderBy('done')
+            ->orderBy('deadline')
+            ->get();
     }
 
     /**
