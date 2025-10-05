@@ -11,7 +11,7 @@
 
     @foreach ($todos as $todo)
 
-        <div class="h-auto w-[70vh] py-5 pl-13 pr-6 border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden">
+        <div class="h-auto w-[70vh] py-5 pl-13 pr-4 border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden">
             <div class="w-[7%] h-full absolute top-0 left-0" style="background-color: {{ $todo->color }}"></div>
             <form action="{{ route('todo.delete') }}" method="POST">
                 @method('DELETE')
@@ -41,13 +41,20 @@
                             </span>
                         </div>
                     </div>
-                    <div class="ml-auto flex items-start">
+                    <div class="ml-auto flex items-start gap-2">
                         <x-link
                             href="{{ route('todo.edit', ['id' => $todo->id]) }}"
                             class="px-4 py-2 text-xs font-semibold text-white bg-blue-500 rounded-md shadow-sm shadow-gray-200 hover:bg-blue-600"
                         >
                             編集
                         </x-link>
+                        <x-link
+                            href="{{ route('todo.delete', ['id' => $todo->id]) }}"
+                            class="px-4 py-2 text-xs font-semibold text-white bg-red-500 rounded-md shadow-sm shadow-gray-200 hover:bg-red-600"
+                        >
+                            削除
+                        </x-link>
+
                     </div>
                 </div>
             </form>
