@@ -6,7 +6,11 @@
             </a>
         </div>
 
-        <div class="flex gap-2">
+        <div class="flex items-center gap-4">
+            @auth
+                <span class="text-sm text-gray-600">{{ auth()->user()->name }}</span>
+            @endauth
+
             <x-link href="{{ route('todo.new') }}">
                 <x-google-icon name="add" class="text-2xl"/>
             </x-link>

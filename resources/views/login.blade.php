@@ -4,6 +4,7 @@
 <div class="w-full h-auto pt-14 pb-10 flex justify-center items-start">
     <div class="h-auto w-[70vh] py-10 px-14 border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200">
         <form action="{{ route('auth.login') }}" method="POST">
+            @csrf
             <h2 class="text-xl font-semibold tracking-wider">
                 Login
             </h2>

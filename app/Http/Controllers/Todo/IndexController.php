@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Todo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -14,7 +15,12 @@ class IndexController extends Controller
 
     public function __invoke()
     {
-        $todos = $this->repository->list(1)->sortBy("deadline");
+        $user = Auth::user();
+        if ($user === null) {
+            return redirect()->route('login');
+        }
+
+        $todos = $this->repository->list($user->id)->sortBy("deadline");
 
         return view('todo.index', [
             'todos' => $todos,
