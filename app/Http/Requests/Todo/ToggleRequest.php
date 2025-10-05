@@ -11,7 +11,8 @@ class ToggleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        // 仮実装。動作確認のため、認証無し
+        return true;
     }
 
     /**
