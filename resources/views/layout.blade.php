@@ -13,8 +13,10 @@
     <title>{{ env('APP_NAME') }}</title>
 </head>
 <body class="min-h-dvh w-screen bg-gradient-to-br from-[#f3f6fb] via-[#fbfbfe] to-[#f6f1ff] text-slate-800 [&>:box-border]">
-    @include('common.header')
-    <main class="w-full h-full pt-header">
+    @unless (View::hasSection('hide-header'))
+        @include('common.header')
+    @endunless
+    <main class="w-full h-full @unless(View::hasSection('hide-header')) pt-header @endunless">
         @yield('main')
     </main>
 </body>
