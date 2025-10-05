@@ -21,7 +21,15 @@ class UpdateController extends Controller
 
         $datetime = null;
 
-        if ($date !== null && $time !== null) {
+        // timeがnullの時は、time を00:00として扱う
+        if ($date !== null) {
+            if ($time === null) {
+                $time = '00:00';
+            }
+            $datetime = "{$date} {$time}";
+        } elseif ($time !== null) {
+            // dateがnullの時は、dateを今日の日付として扱う
+            $date = date('Y-m-d');
             $datetime = "{$date} {$time}";
         }
 
