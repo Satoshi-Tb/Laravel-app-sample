@@ -30,7 +30,6 @@ class UpdateRequest extends FormRequest
             'date' => ['nullable', 'date_format:Y-m-d'],
             'time' => ['nullable', 'date_format:H:i'],
             'color' => ['nullable', new Enum(Color::class)],
-            'done' => ['required', 'boolean'],
         ];
     }
 
