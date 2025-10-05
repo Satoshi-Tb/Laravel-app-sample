@@ -4,3 +4,12 @@
     --font-sans: "M PLUS 1", "Noto Sans JP", serif;
     --spacing-header: 5vh;
 }
+
+button,
+button:focus {
+    cursor: pointer;
+}
+
+.todo-done {
+    cursor: pointer;
+}
