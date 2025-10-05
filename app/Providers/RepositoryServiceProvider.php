@@ -6,6 +6,7 @@ use App\Repositories\Repository;
 use App\Repositories\TodoRepository;
 use Illuminate\Support\ServiceProvider;
 use App\Http\Controllers\Todo;
+use App\Http\Controllers\Api\Todo\ToggleController;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,7 @@ class RepositoryServiceProvider extends ServiceProvider
                 Todo\CreateController::class,
                 Todo\UpdateController::class,
                 Todo\DeleteController::class,
+                ToggleController::class,
             ])
             ->needs(Repository::class)
             ->give(fn() => new TodoRepository());

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Todo\ToggleController;
 use Illuminate\Support\Facades\Route;
 
 // 名前空間はapi.、エンドポイントは/todo/toggle
@@ -7,9 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::as('api.')->group(function () {
     Route::prefix('/todo')
         ->as('todo.')
+        ->middleware('throttle:50,1') // レートリミット. 1分間に50回まで
         ->group(function() {
-            Route::get('/toggle', function () {
-                return ['test' => 'API TEST'];
-            })->name('toggle');
+            Route::put('/toggle', ToggleController::class)
+                ->name('toggle');
         });
 });

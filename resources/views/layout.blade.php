@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Murecho:wght@100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
     @vite(['resources/ts/app.ts'])
+    @stack('scripts')
     <title>{{ env('APP_NAME') }}</title>
 </head>
 <body class="h-dvh w-screen bg-white [&>:box-border]">
