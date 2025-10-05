@@ -23,9 +23,9 @@
             @enderror
             </div>
             <div class="mt-10 flex justify-end">
-                <button type="submit" class="p-3 text-sm text-white bg-blue-500 rounded-sm shadow-md shadow-gray-300">
+                <x-submit-button>
                     ログイン
-                </button>
+                </x-submit-button>
             </div>
         </form>
     </div>

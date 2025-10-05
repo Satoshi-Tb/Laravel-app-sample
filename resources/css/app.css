@@ -5,11 +5,6 @@
     --spacing-header: 5vh;
 }
 
-button,
-button:focus {
-    cursor: pointer;
-}
-
 .todo-done {
     cursor: pointer;
 }

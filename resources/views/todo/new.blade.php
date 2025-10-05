@@ -26,9 +26,9 @@
                 <textarea name="memo" value="{{ @old('memo') }}" placeholder="メモ" class="w-full min-h-20 resize-none field-sizing-content p-3 text-xs rounded-md border border-gray-400 focus:outline-blue-500"></textarea>
             </div>
             <div class="mt-10 flex justify-end">
-                <button type="submit" class="p-3 text-sm text-white bg-blue-500 rounded-sm shadow-md shadow-gray-300">
+                <x-submit-button>
                     ToDoを追加
-                </button>
+                </x-submit-button>
             </div>
         </form>
     </div>
