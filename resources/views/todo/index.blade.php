@@ -17,7 +17,7 @@
                 @method('DELETE')
                 <div class="flex items-center gap-7">
                     <div class="mt-2">
-                        <input type="checkbox" @checked($todo->done) class="w-[25px] h-[25px] todo-done" todo-id="{{ $todo->id }}">
+                        <input type="checkbox" @checked($todo->done) class="w-[25px] h-[25px] cursor-pointer todo-done" todo-id="{{ $todo->id }}">
                     </div>
                     <div class="w-full flex flex-col items-start gap-3">
                         <x-link href="{{ route('todo.edit', ['id' => $todo->id]) }}" class="text-md font-semibold tracking-wider">

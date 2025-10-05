@@ -4,7 +4,3 @@
     --font-sans: "M PLUS 1", "Noto Sans JP", serif;
     --spacing-header: 5vh;
 }
-
-.todo-done {
-    cursor: pointer;
-}
