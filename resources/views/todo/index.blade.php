@@ -11,7 +11,7 @@
 
     @foreach ($todos as $todo)
 
-        <div class="h-auto w-[70vh] py-5 pl-13 pr-4 border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden">
+        <div class="h-auto w-[70vh] py-4 pl-13 pr-4 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden">
             <div class="w-[7%] h-full absolute top-0 left-0" style="background-color: {{ $todo->color }}"></div>
             <form action="{{ route('todo.delete') }}" method="POST">
                 @method('DELETE')

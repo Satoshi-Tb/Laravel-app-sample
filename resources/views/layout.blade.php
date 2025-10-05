@@ -12,9 +12,11 @@
     @stack('scripts')
     <title>{{ env('APP_NAME') }}</title>
 </head>
-<body class="h-dvh w-screen bg-white [&>:box-border]">
-    @include('common.header')
-    <main class="w-full h-full pt-header">
+<body class="min-h-dvh w-screen bg-[#F2F5F9] text-slate-800 [&>:box-border]">
+    @unless (View::hasSection('hide-header'))
+        @include('common.header')
+    @endunless
+    <main class="w-full h-full @unless(View::hasSection('hide-header')) pt-header @endunless">
         @yield('main')
     </main>
 </body>
