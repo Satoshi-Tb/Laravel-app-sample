@@ -50,13 +50,13 @@
                         >
                             編集
                         </x-link>
-                        <button
-                            type="submit"
-                            class="px-4 py-2 text-xs font-semibold text-white bg-red-500 rounded-md shadow-sm shadow-gray-200 hover:bg-red-600"
+                        <x-submit-button
+                            color="red"
+                            class="px-4 py-2 text-xs font-semibold"
                             onclick="return confirm('削除しますか？');"
                         >
                             削除
-                        </button>
+                        </x-submit-button>
                     </div>
                 </div>
             </form>
