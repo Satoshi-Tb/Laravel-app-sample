@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Todo;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class DeleteRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class DeleteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**

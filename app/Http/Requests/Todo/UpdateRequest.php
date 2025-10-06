@@ -4,6 +4,7 @@ namespace App\Http\Requests\Todo;
 
 use App\Enums\Color;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 
 class UpdateRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return Auth::check();
     }
 
     /**
