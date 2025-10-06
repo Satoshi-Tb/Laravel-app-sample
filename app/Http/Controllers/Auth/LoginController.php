@@ -20,9 +20,19 @@ class LoginController extends Controller
         ]);
 
         if ($logined === true) {
+            /**
+            * @var \App\Models\User $user
+            */
+            $user = Auth::user();
+            $token = $user->createToken('api-token');
+            // サインアップ時にトークンをCookieに格納
+            $cookie = cookie('API_TOKEN', $token->plainTextToken, sameSite: 'Strict', httpOnly: true, );
+
             $request->session()->regenerate();
 
-            return redirect()->intended(route('todo.index'));
+            return redirect()
+                ->intended(route('todo.index'))
+                ->withCookie($cookie);
         }
 
         return back()->withErrors([
