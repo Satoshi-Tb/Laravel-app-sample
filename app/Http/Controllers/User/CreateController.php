@@ -27,7 +27,17 @@ class CreateController extends Controller
         ]);
 
         if ($logined === true) {
-            return redirect()->route('todo.index');
+            /**
+            * @var \App\Models\User $user
+            */
+           $user = Auth::user();
+           $token = $user->createToken('api-token');
+           // サインアップ時にトークンをCookieに格納
+           $cookie = cookie('API_TOKEN', $token->plainTextToken, sameSite: 'Strict', httpOnly: true, );
+
+           return redirect()
+               ->route('todo.index')
+               ->withCookie($cookie);
         }
 
         return redirect()->route('signup');
