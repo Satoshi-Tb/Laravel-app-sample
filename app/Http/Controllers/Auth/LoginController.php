@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -20,19 +19,10 @@ class LoginController extends Controller
         ]);
 
         if ($logined === true) {
-            /**
-            * @var \App\Models\User $user
-            */
-            $user = Auth::user();
-            $token = $user->createToken('api-token');
-            // サインアップ時にトークンをCookieに格納
-            $cookie = cookie('API_TOKEN', $token->plainTextToken, sameSite: 'Strict', httpOnly: true, );
-
             $request->session()->regenerate();
 
             return redirect()
-                ->intended(route('todo.index'))
-                ->withCookie($cookie);
+                ->intended(route('todo.index'));
         }
 
         return back()->withErrors([
