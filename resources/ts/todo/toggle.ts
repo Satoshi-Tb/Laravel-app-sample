@@ -1,7 +1,27 @@
 import axios from "axios";
 
+let csrfPromise: Promise<void> | null = null;
+
+const ensureCsrfCookie = async () => {
+    if (csrfPromise === null) {
+        csrfPromise = axios
+            .get("/sanctum/csrf-cookie")
+            .then(() => {
+                /* cookie prepared */
+            })
+            .catch((error) => {
+                csrfPromise = null;
+                throw error;
+            });
+    }
+
+    return csrfPromise;
+};
+
 // toggle apiを呼び出す
 const toggle = async (id: number, done: boolean) => {
+    await ensureCsrfCookie();
+
     const res = await axios.put(
         "/api/todo/toggle",
         {
