@@ -22,9 +22,10 @@ class CreateRequest extends FormRequest
      */
     public function rules(): array
     {
-                return [
+        return [
             'username' => ['required', 'string'],
-            'email' => ['required', 'email:refc,dns', 'unique:users,email'], // refc: RFC 準拠, dns: 存在するドメイン, usersemail: users テーブルの email カラムとユニーク
+            // 'email' => ['required', 'email:refc,dns', 'unique:users,email'], // refc: RFC 準拠, dns: 存在するドメイン, usersemail: users テーブルの email カラムとユニーク
+            'email' => ['required', 'email:refc', 'unique:users,email'], // テスト用アプリのため、dnsチェックは無効にする
             'password' => ['required', Password::defaults()], // デフォルトは8文字以上
             'password_confirmed' => ['required', 'same:password'],
         ];
