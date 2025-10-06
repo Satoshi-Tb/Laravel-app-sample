@@ -22,8 +22,11 @@ class IndexController extends Controller
 
         $todos = $this->repository->list($user->id);
 
+        $emptyMessage = $todos->isEmpty() ? 'TODOが登録されていません。' : null;
+
         return view('todo.index', [
             'todos' => $todos,
+            'emptyMessage' => $emptyMessage,
         ]);
     }
 }

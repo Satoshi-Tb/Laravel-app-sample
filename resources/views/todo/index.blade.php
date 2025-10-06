@@ -9,6 +9,12 @@
 @section('main')
 <div class="w-full h-auto pt-14 pb-10 flex flex-col justify-start items-center gap-6">
 
+    @if ($emptyMessage !== null)
+        <div class="w-[70vh] py-6 text-center text-gray-500 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200">
+            {{ $emptyMessage }}
+        </div>
+    @endif
+
     @foreach ($todos as $todo)
 
         <div class="h-auto w-[70vh] py-4 pl-13 pr-4 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden">
