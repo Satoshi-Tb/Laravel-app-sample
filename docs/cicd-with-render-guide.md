@@ -101,3 +101,12 @@ jobs:
 3. 管理画面で「Manual Deploy」を試して GitHub Actions のステータス連携が動いているか確認する。
 
 以上で Render へ Laravel アプリをデプロイし、GitHub ベースの CI/CD を構築できます。デモ用途で無料枠を使いたい場合は、サービスがスリープする点に注意しておいてください。
+
+## 6. よくあるハマりどころ
+
+- **APP_KEY などの環境変数を渡し忘れる**  
+  Docker ビルド時には `.env` が反映されないため、コンテナ起動時に `--env-file .env` を指定するか、ホスティング先の管理画面で `APP_KEY` を含む必要な環境変数を登録する。キーが未設定のまま `php artisan serve` を起動すると「No application encryption key has been specified.」で 500 エラーになる。
+- **Vite エントリの追加漏れ**  
+  テンプレートやスクリーンごとの TypeScript ファイルを `@vite(...)` で読み込む場合、`vite.config.ts` の `laravel({ input: [...] })` に忘れず追加する。開発サーバー (`npm run dev`) では動作しても、本番ビルドで `Unable to locate file in Vite manifest` が発生するので注意。
+- **Sanctum のステートフルドメイン設定**  
+  API 認証で `auth:sanctum` を使う場合、`SANCTUM_STATEFUL_DOMAINS` にブラウザからアクセスするホスト名・ポートを列挙する。`localhost` と `127.0.0.1` は別扱いなので、両方を `.env` で指定しておくのが実用的。環境ごとに切り替えたいので、`config/sanctum.php` へ直書きするより `.env` で制御する方が柔軟。
