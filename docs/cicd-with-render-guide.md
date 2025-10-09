@@ -1,10 +1,10 @@
-# Render へのデプロイ & GitHub 連携 CI/CD 手順
+# Render へのデプロイ & GitHub 連携 CI/CD 手順（Free プラン想定）
 
 ## 前提
 
 - Render アカウントと GitHub アカウントを用意し、当リポジトリを GitHub 上に配置しておく。
 - Dockerfile をリポジトリ直下へ配置してある想定（未作成の場合は下記を参照）。
-- SQLite を永続化する場合は Render の Persistent Disk（無料枠 1GB）を利用する。
+- Free Web Service を利用するため、SQLite データベースはデプロイやスリープ復帰のたびに初期化される前提で構わないこと。
 
 ## 1. Dockerfile の準備
 
@@ -38,16 +38,18 @@ CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 1. Render ダッシュボードで **New → Web Service** を選択し、GitHub リポジトリを接続。
 2. Branch はデプロイ対象ブランチを選択、Environment は **Docker** を選択。
 3. Build Command は空欄のままで OK（Dockerfile がそのまま使われる）。
-4. Advanced→Disk で Persistent Disk を追加する場合はパスと容量を指定（例: `/var/www/html/storage` で 1GB）。
+4. Free Web Service では Persistent Disk を追加できない点に注意（Starter 以上で利用可能）。
 5. 環境変数に `.env` と同等の値を設定。
    - `APP_KEY` はローカルで `php artisan key:generate --show` を実行して値をコピー。
    - `APP_ENV=production`、`APP_DEBUG=false`、`APP_URL=https://<service-name>.onrender.com` なども設定。
 6. **Create Web Service** をクリックすると初回デプロイが実行される。
 
-## 3. SQLite の永続化（任意）
+## 3. SQLite 運用（Free プラン）
 
-- Persistent Disk を `/var/www/html/database` などにマウントし、`config/database.php` の SQLite パスをそのディスク上へ変更する。
-- Render のコンソールで `php artisan migrate` を実行して初期テーブルを作成。
+- Free Web Service は再デプロイやスリープ復帰のたびにファイルシステムがリセットされるため、SQLite データは毎回初期化される前提で運用する。
+- Laravel 側では `config/database.php` の SQLite 設定をそのまま利用し、`storage/database/database.sqlite` を使う。
+- 起動時に自動でテーブルを作成するため、デプロイコマンドに `php artisan migrate --force`（必要なら `--seed`）を追加するか、GitHub Actions のワークフローに同コマンドを組み込む。
+- 本番同等の永続化が必要になったら、Render External Database（MySQL/PostgreSQL）や他社の無料 DB サービスを利用し、`.env` 相当の環境変数で接続設定を渡す。
 
 ## 4. GitHub 連携で自動デプロイ
 
@@ -90,6 +92,7 @@ jobs:
 ```
 
 - `service-id` と `api-key` は Render ダッシュボードから取得し、GitHub リポジトリの Secrets に保存する。
+- Free プランでの SQLite 初期化対応として、Render サービスの Start Command を `php artisan migrate --force && php artisan serve ...` のように変更するか、デプロイ直後に Render の Shell で `php artisan migrate --force` を実行し、毎回スキーマを構築する。
 
 ## 5. 動作確認
 
