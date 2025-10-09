@@ -21,10 +21,12 @@ RUN docker-php-ext-install pdo_sqlite
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-interaction --ansi
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ansi --no-scripts
 
 COPY . ./
 COPY --from=frontend /app/public/build ./public/build
+
+RUN php artisan package:discover --ansi
 
 RUN chown -R www-data:www-data storage bootstrap/cache database
 
