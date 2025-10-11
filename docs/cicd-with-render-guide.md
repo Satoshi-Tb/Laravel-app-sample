@@ -33,6 +33,17 @@ EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 ```
 
+### ローカルでの動作確認
+
+Dockerfile を用意したら、Render へ push する前にローカルでビルドと起動確認を行う:
+
+```bash
+docker build -t laravel-app:dev .
+docker run --rm -d --name laravel-app -p 8000:8000 --env-file .env laravel-app:dev
+```
+
+`http://localhost:8000` にアクセスしてアプリが期待通り動くか確認する。`docker stop laravel-app` で停止すると `--rm` によりコンテナが自動削除されるので、続けて `docker image rm laravel-app:dev` でローカルイメージも整理しておくとよい。
+
 ## 2. Render サービスの作成
 
 1. Render ダッシュボードで **New → Web Service** を選択し、GitHub リポジトリを接続。
