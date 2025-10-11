@@ -11,9 +11,11 @@ jobs:
 
     steps:
       - name: Checkout repository
+        # ワークフローでリポジトリ内容を取得
         uses: actions/checkout@v4
 
       - name: Set up PHP
+        # PHP 8.3 + SQLite 拡張をインストール
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.3"
@@ -21,9 +23,12 @@ jobs:
           extensions: sqlite
 
       - name: Install dependencies
+        # Composer 依存パッケージをインストール
         run: composer install --no-progress --prefer-dist --no-interaction
 
       - name: Run tests
+        # テスト環境設定 (.env.testing) を用いてテスト実行
+        # .env.testingファイルを事前準備必要
         run: php artisan test --env=testing
 
   deploy:
@@ -32,6 +37,7 @@ jobs:
 
     steps:
       - name: Trigger Render deploy
+        # Render API を叩いてデプロイを開始
         uses: render-oss/render-action@v1
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
