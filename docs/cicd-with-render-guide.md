@@ -58,7 +58,7 @@ docker run --rm -d --name laravel-app -p 8000:8000 --env-file .env laravel-app:d
 ## 3. SQLite 運用（Free プラン）
 
 - Free Web Service は再デプロイやスリープ復帰のたびにファイルシステムがリセットされるため、SQLite データは毎回初期化される前提で運用する。
-- Laravel 側では `config/database.php` の SQLite 設定をそのまま利用し、`storage/database/database.sqlite` を使う。
+- Laravel 側では `config/database.php` の SQLite 設定をそのまま利用し、`database/database.sqlite` を使う（コンテナ起動時に `touch database/database.sqlite` しておくとファイル未作成エラーを避けられる）。
 - 起動時に自動でテーブルを作成するため、デプロイコマンドに `php artisan migrate --force`（必要なら `--seed`）を追加するか、GitHub Actions のワークフローに同コマンドを組み込む。
 - 本番同等の永続化が必要になったら、Render External Database（MySQL/PostgreSQL）や他社の無料 DB サービスを利用し、`.env` 相当の環境変数で接続設定を渡す。
 
