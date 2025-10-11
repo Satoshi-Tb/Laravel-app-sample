@@ -121,3 +121,5 @@ jobs:
   テンプレートやスクリーンごとの TypeScript ファイルを `@vite(...)` で読み込む場合、`vite.config.ts` の `laravel({ input: [...] })` に忘れず追加する。開発サーバー (`npm run dev`) では動作しても、本番ビルドで `Unable to locate file in Vite manifest` が発生するので注意。
 - **Sanctum のステートフルドメイン設定**  
   API 認証で `auth:sanctum` を使う場合、`SANCTUM_STATEFUL_DOMAINS` にブラウザからアクセスするホスト名・ポートを列挙する。`localhost` と `127.0.0.1` は別扱いなので、両方を `.env` で指定しておくのが実用的。環境ごとに切り替えたいので、`config/sanctum.php` へ直書きするより `.env` で制御する方が柔軟。
+- **HTTPS アセットが読み込まれない**  
+  `@vite` のアセット URL が `http://` になってしまう場合は、Render の Environment に `ASSET_URL=https://<service-name>.onrender.com` を追加すると正しいスキームで配信される。
