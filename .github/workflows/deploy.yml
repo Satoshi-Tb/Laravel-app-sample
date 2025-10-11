@@ -26,6 +26,22 @@ jobs:
         # Composer 依存パッケージをインストール
         run: composer install --no-progress --prefer-dist --no-interaction
 
+      - name: Set up Node.js
+        # Vite ビルド用に Node.js 20 を用意
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install frontend dependencies
+        # フロントエンド依存関係をインストール
+        run: npm ci
+
+      - name: Build frontend assets
+        # Vite ビルドで public/build/manifest.json を生成
+        run: npm run build
+
       - name: Run tests
         # テスト環境設定 (.env.testing) を用いてテスト実行
         # .env.testingファイルを事前準備必要
