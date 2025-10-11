@@ -37,8 +37,8 @@ jobs:
 
     steps:
       - name: Trigger Render deploy
-        # Render API を叩いてデプロイを開始
-        uses: render-oss/render-action@v1
-        with:
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+        # Renderにdeploy指示を出す
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
