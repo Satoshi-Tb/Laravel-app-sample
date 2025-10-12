@@ -6,11 +6,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class IndexControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    #[TestDox('認証済みユーザーは未完了優先で並んだTODO一覧を閲覧できる')]
     public function test_authenticated_user_sees_sorted_todos(): void
     {
         $user = User::factory()->create();
@@ -59,6 +61,7 @@ class IndexControllerTest extends TestCase
             });
     }
 
+    #[TestDox('TODOが存在しない場合は空メッセージが表示される')]
     public function test_authenticated_user_sees_empty_message_when_no_todos(): void
     {
         $user = User::factory()->create();
@@ -74,6 +77,7 @@ class IndexControllerTest extends TestCase
             ->assertViewHas('emptyMessage', 'TODOが登録されていません。');
     }
 
+    #[TestDox('未ログイン利用者は一覧にアクセスできずログイン画面へリダイレクトされる')]
     public function test_guest_is_redirected_to_login(): void
     {
         $response = $this->get(route('todo.index'));

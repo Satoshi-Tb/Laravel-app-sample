@@ -6,11 +6,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class EditControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    #[TestDox('認証済みユーザーは編集画面で締切日時が整形表示される')]
     public function test_authenticated_user_can_view_edit_form_with_formatted_datetime(): void
     {
         $user = User::factory()->create();
@@ -38,6 +40,7 @@ class EditControllerTest extends TestCase
             });
     }
 
+    #[TestDox('存在しないTODOの編集画面は一覧へリダイレクトされる')]
     public function test_missing_todo_redirects_to_index(): void
     {
         $user = User::factory()->create();
@@ -47,6 +50,7 @@ class EditControllerTest extends TestCase
         $response->assertRedirect(route('todo.index'));
     }
 
+    #[TestDox('未ログイン利用者は編集画面にアクセスできずログイン画面へリダイレクトされる')]
     public function test_guest_is_redirected_to_login(): void
     {
         $response = $this->get(route('todo.edit', ['id' => 1]));

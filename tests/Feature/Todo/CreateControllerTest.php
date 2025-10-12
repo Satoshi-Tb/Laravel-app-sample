@@ -6,11 +6,13 @@ use App\Enums\Color;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class CreateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    #[TestDox('日付のみ指定したTODOを登録できる')]
     public function test_authenticated_user_can_create_todo_with_date_only(): void
     {
         $user = User::factory()->create();
@@ -34,6 +36,7 @@ class CreateControllerTest extends TestCase
         ]);
     }
 
+    #[TestDox('時刻のみ指定したTODOは当日の日付で保存される')]
     public function test_authenticated_user_can_create_todo_with_time_only(): void
     {
         $user = User::factory()->create();
@@ -57,6 +60,7 @@ class CreateControllerTest extends TestCase
         ]);
     }
 
+    #[TestDox('タイトル未入力はバリデーションエラーになる')]
     public function test_validation_error_when_title_missing(): void
     {
         $user = User::factory()->create();
@@ -76,6 +80,7 @@ class CreateControllerTest extends TestCase
         $this->assertDatabaseCount('todos', 0);
     }
 
+    #[TestDox('未ログイン利用者はログイン画面へリダイレクトされる')]
     public function test_guest_is_redirected_to_login(): void
     {
         $response = $this->post(route('todo.create'), [

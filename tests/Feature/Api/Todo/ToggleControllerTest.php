@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class ToggleControllerTest extends TestCase
 {
@@ -14,6 +15,7 @@ class ToggleControllerTest extends TestCase
 
     private const ENDPOINT = '/api/todo/toggle';
 
+    #[TestDox('認証済みユーザーは完了状態を更新できる')]
     public function test_authenticated_user_can_toggle_done_state(): void
     {
         $user = User::factory()->create();
@@ -42,6 +44,7 @@ class ToggleControllerTest extends TestCase
         ]);
     }
 
+    #[TestDox('未認証ユーザーはトグルAPIへアクセスできない')]
     public function test_request_requires_authenticated_user(): void
     {
         $response = $this->putJson(self::ENDPOINT, [
@@ -52,6 +55,7 @@ class ToggleControllerTest extends TestCase
         $response->assertUnauthorized();
     }
 
+    #[TestDox('不正なリクエストはバリデーションエラーとなり状態が変更されない')]
     public function test_validation_errors_are_returned_for_invalid_payload(): void
     {
         $user = User::factory()->create();

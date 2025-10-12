@@ -7,11 +7,13 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class UpdateControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    #[TestDox('日付と時刻を指定してTODOを更新できる')]
     public function test_authenticated_user_can_update_todo_with_date_and_time(): void
     {
         $user = User::factory()->create();
@@ -45,6 +47,7 @@ class UpdateControllerTest extends TestCase
         ]);
     }
 
+    #[TestDox('時刻のみ更新すると当日の日付が補完される')]
     public function test_time_only_update_uses_current_date(): void
     {
         $user = User::factory()->create();
@@ -77,6 +80,7 @@ class UpdateControllerTest extends TestCase
         ]);
     }
 
+    #[TestDox('タイトル未入力の更新はバリデーションエラーになる')]
     public function test_validation_error_when_title_missing(): void
     {
         $user = User::factory()->create();
@@ -109,6 +113,7 @@ class UpdateControllerTest extends TestCase
         ]);
     }
 
+    #[TestDox('未ログイン利用者は更新時にログイン画面へリダイレクトされる')]
     public function test_guest_is_redirected_to_login(): void
     {
         $response = $this->put(route('todo.update'), [

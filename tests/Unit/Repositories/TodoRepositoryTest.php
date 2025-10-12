@@ -7,11 +7,13 @@ use App\Repositories\TodoRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 
 class TodoRepositoryTest extends TestCase
 {
     use RefreshDatabase;
 
+    #[TestDox('listメソッドはユーザー別に絞り込み未完了優先でソートする')]
     public function test_list_orders_by_done_and_deadline_and_filters_user(): void
     {
         $user = User::factory()->create();
