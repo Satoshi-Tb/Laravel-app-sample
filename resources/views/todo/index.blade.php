@@ -7,7 +7,7 @@
 @extends('layout')
 
 @section('main')
-<div class="w-full h-auto pt-14 pb-10 flex flex-col justify-start items-center gap-6">
+<div class="w-full h-auto pt-14 pb-10 flex flex-col justify-start items-center gap-6" data-todo-list="true">
 
     @if ($emptyMessage !== null)
         <div class="w-[70vh] py-6 text-center text-gray-500 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200">
@@ -17,7 +17,13 @@
 
     @foreach ($todos as $todo)
 
-        <div class="h-auto w-[70vh] py-4 pl-13 pr-4 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden">
+        <div
+            class="h-auto w-[70vh] py-4 pl-13 pr-4 bg-white border-solid border-[0.5px] border-gray-300 rounded-lg shadow-md shadow-gray-200 relative overflow-hidden"
+            data-todo-card="true"
+            data-todo-id="{{ $todo->id }}"
+            data-todo-done="{{ (int) $todo->done }}"
+            data-todo-deadline="{{ $todo->deadline ?? '' }}"
+        >
             <div class="w-[7%] h-full absolute top-0 left-0" style="background-color: {{ $todo->color }}"></div>
             <form action="{{ route('todo.delete') }}" method="POST">
                 @method('DELETE')
