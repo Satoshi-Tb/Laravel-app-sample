@@ -1,7 +1,7 @@
 # composer だけ別ステージで拾う
 FROM composer:2 AS composer_src
 
-FROM php:8.4
+FROM php:8.4-fpm
 
 # bash を使う（nvm 用）
 SHELL ["/bin/bash", "-c"]
