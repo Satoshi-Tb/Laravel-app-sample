@@ -1,4 +1,9 @@
-# syntax=docker/dockerfile:1
+
+# Render の Web Service（Docker デプロイ）に最適化した構成
+# - Node ステージで Vite 資産をビルドし、PHP-FPM + Nginx ステージへ取り込む
+# - Render 固定ポート `8080` を待ち受ける Nginx と、stdout/stderr へログを流す設定を含む
+# - 起動時は `docker/render/entrypoint.sh` が config/cache・SQLite の初期化と `php artisan migrate --force` を実行
+# - Sanctum や CSRF Cookie を含む一連の本番設定が Render で動作するよう調整済み
 
 # フロントエンド資産をビルドするステージ
 FROM node:20-alpine AS frontend
