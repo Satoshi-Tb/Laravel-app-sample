@@ -63,5 +63,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 ENV PORT=8080
 EXPOSE 8080
 
-# マイグレーション後に PHP-FPM と Nginx を起動
+# CMD ではなく ENTRYPOINT を使うことで、Render 起動時に必ず entrypoint.sh を通し、
+# マイグレーションなどの前処理をスキップできないようにする
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
