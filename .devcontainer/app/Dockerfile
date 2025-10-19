@@ -11,10 +11,13 @@ SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update; \
-    apt install git zip unzip curl -y; \
+    apt install git zip unzip curl autoconf g++ make -y; \
     # PHP 拡張
     docker-php-ext-install pdo pdo_mysql mysqli; \
     docker-php-ext-enable pdo_mysql; \
+    # Xdebug をインストール
+    pecl install xdebug; \
+    docker-php-ext-enable xdebug; \
     \
     # キャッシュ掃除
     rm -rf /var/lib/apt/lists/*
@@ -22,6 +25,11 @@ RUN apt update; \
 # composer を配置
 COPY --from=composer_src /usr/bin/composer /usr/local/bin/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# xdebugの設定をコピー
+COPY xdebug.ini /usr/local/etc/php/conf.d/99-xdebug.ini
+# xdebugのログファイルを作成する
+RUN touch /var/log/xdebug.log && chmod a+w /var/log/xdebug.log
 
 # 公式スクリプトで nvm を導入し、LTS をインストール
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash && \
