@@ -151,3 +151,6 @@ jobs:
 
 - **Vite エントリの追加漏れ**  
   新しいエントリポイントを追加した際は `vite.config.ts` の `laravel({ input: [...] })` に忘れず追記する。ローカル開発では動作しても本番ビルドでは `Unable to locate file in Vite manifest` が起きる。
+
+- **WSL2を利用する場合の、nginxの権限設定について**  
+  nginxが参照するフォルダには、www-dataの権限が必要になる。bind mountを利用する場合、すでにWindows側で作成済のファイルの場合、Dockerファイルにオーナー変更処理を記載していても反映されない場合がある。その場合、コンテナ接続後に所有権変更コマンドを発行すれば解決できる。

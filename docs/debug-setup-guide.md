@@ -20,3 +20,6 @@ devcontainer 環境で VS Code のブレークポイントを効かせるまで�
 8. `php artisan serve` など対象プロセスを起動し、ブレークポイントを置いてブラウザや CLI からリクエストすると停止します。
 
 手順 3 の `docker-php-ext-xdebug.ini` を編集することでブレークポイントが効くようになる点が重要です。
+
+## 課題
+php-fpm環境でXdebug環境がうまく構築できていない。

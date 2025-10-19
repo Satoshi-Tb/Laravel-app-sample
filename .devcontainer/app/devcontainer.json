@@ -16,7 +16,8 @@
                 "bmewburn.vscode-intelephense-client",
                 "ecmel.vscode-html-css",
                 "neilbrayfield.php-docblocker",
-                "jacobcassidy.css-nesting-syntax-highlighting"
+                "jacobcassidy.css-nesting-syntax-highlighting",
+                "xdebug.php-pack"
             ]
         }
     }

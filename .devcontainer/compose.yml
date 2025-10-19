@@ -7,8 +7,13 @@ services:
       context: ./app
     volumes:
       - ../:/laravel-app:cached
+      - ../:/var/www/html:cached
       - laravel-app-vendor:/laravel-app/vendor
+      - laravel-app-vendor:/var/www/html/vendor
       - laravel-app-node_modules:/laravel-app/node_modules
+      - laravel-app-node_modules:/var/www/html/node_modules
+    expose:
+      - "9000"
     tty: true
     networks:
       - laravel-app-net
@@ -26,6 +31,19 @@ services:
       TZ: Asia/Tokyo
     ports:
       - 3306:3306
+    networks:
+      - laravel-app-net
+
+  nginx:
+    container_name: laravel-app-nginx
+    image: nginx:1.27-alpine
+    depends_on:
+      - app
+    ports:
+      - 8080:8080
+    volumes:
+      - ../:/var/www/html:cached
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
       - laravel-app-net
 
